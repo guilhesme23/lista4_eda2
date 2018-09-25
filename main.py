@@ -11,6 +11,7 @@ def mainMenu():
   print('2 - Transformar lista em arvore AVL')
   print('3 - Inserir na arvore')
   print('4 - Remover da arvore')
+  print('5 - Buscar na arvore')
   print('8 - Printar arvore')
   print('0 - Sair')
   option = input()
@@ -46,6 +47,11 @@ if __name__ == '__main__':
       x = int(input('Digite o elemento que deseja remover: '))
       a.delete(x)
       print('Elemento removido com sucesso')
+    elif option == '5':
+      clear()
+      x = int(input('Digite o elemento que deseja procurar: '))
+      exists = a.search(x)
+      print('Elemento existe na arvore') if exists else print('Elemento não existe na arvore')
     elif option == '8':
       clear()
       a.display()

@@ -211,3 +211,18 @@ class AVLTree():
                 self.node.left.display(level + 1, '<')
             if self.node.left != None:
                 self.node.right.display(level + 1, '>')
+    
+    def search(self, key):
+        temp = self.node
+
+        while temp:
+            if key == temp.key:
+                return True
+            elif key < temp.key:
+                temp = temp.left.node
+                continue
+            else:
+                temp = temp.right.node
+                continue
+        
+        return False
