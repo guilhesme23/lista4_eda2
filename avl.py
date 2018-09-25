@@ -1,16 +1,18 @@
+from copy import deepcopy, copy
 outputdebug = False 
 
 def debug(msg):
     if outputdebug:
         print(msg)
 
-class Node():
+class Node(object):
     def __init__(self, key):
         self.key = key
         self.left = None 
         self.right = None 
 
 class AVLTree():
+    __slots__ = 'a', '__dict__'
     def __init__(self, *args):
         self.node = None 
         self.height = -1  
@@ -19,7 +21,21 @@ class AVLTree():
         if len(args) == 1: 
             for i in args[0]: 
                 self.insert(i)
-                
+
+    def __copy__(self):
+        return type(self)(self.node, self.height, self.balance)
+    
+    def __deepcopy__(self, memo):
+        id_self = id(self)
+        _copy = memo.get(id_self)
+        if _copy is None:
+            _copy = type(self)(
+                deepcopy(self.node, memo), 
+                deepcopy(self.height, memo),
+                deepcopy(self.balance, memo))
+            memo[id_self] = _copy 
+        return _copy
+
     def height(self):
         if self.node: 
             return self.node.height 
